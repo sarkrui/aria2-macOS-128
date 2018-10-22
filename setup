@@ -1,0 +1,67 @@
+#! /bin/bash
+#Scripted by Sark Davidson
+#Expected to download baiduyun files with 128 threads
+#aria2 1.34.0 builds
+#https://github.com/sarkdavidson/aria2c-macOS-128-threads
+
+	cd "$(dirname "$0")"
+
+#kill running aria2c
+	sudo killall aria2c
+	sudo rm /usr/local/bin/aria2c
+
+#remove previous aria2 startups
+	launchctl stop *_aria2_*
+	launchctl remove *_aria2_*
+
+#copy aria2c (128 threads) to /usr/local/bin and make it executable
+	cp resources/aria2c /usr/local/bin/
+	chmod +x /usr/local/bin/aria2c
+
+#aria2 initialization
+	mkdir /Users/shared/aria2/
+	touch /Users/shared/aria2/aria2.session
+
+#import aria2 config
+	cp resources/config/aria6800.conf /Users/shared/aria2/
+	cp resources/config/aria6801.conf /Users/shared/aria2/
+	cp resources/config/aria6802.conf /Users/shared/aria2/
+
+#import aria2 startup	
+	cp resources/startup/com.aria2.6800.plist ~/Library/LaunchAgents/
+	cp resources/startup/com.aria2.6801.plist ~/Library/LaunchAgents/
+	cp resources/startup/com.aria2.6802.plist ~/Library/LaunchAgents/
+
+#import baiduexporter to $home directory
+	cp -r resources/chrome/ /users/shared/aria2/chrome/
+
+#ereplace default download directory with logined user
+	sed -i '' -e 's/username/'$USER'/' /Users/shared/aria2/aria6800.conf
+	sed -i '' -e 's/username/'$USER'/' ~/Library/LaunchAgents/com.aria2.6800.plist 
+
+	sed -i '' -e 's/username/'$USER'/' /Users/shared/aria2/aria6801.conf
+	sed -i '' -e 's/username/'$USER'/' ~/Library/LaunchAgents/com.aria2.6801.plist 
+
+	sed -i '' -e 's/username/'$USER'/' /Users/shared/aria2/aria6802.conf
+	sed -i '' -e 's/username/'$USER'/' ~/Library/LaunchAgents/com.aria2.6802.plist 
+
+#modify permission
+	chmod 644 ~/Library/LaunchAgents/com.aria2.6800.plist
+	chmod 644 ~/Library/LaunchAgents/com.aria2.6801.plist
+	chmod 644 ~/Library/LaunchAgents/com.aria2.6802.plist
+
+#load starup config
+	launchctl load ~/Library/LaunchAgents/com.aria2.6800.plist
+	launchctl load ~/Library/LaunchAgents/com.aria2.6801.plist
+	launchctl load ~/Library/LaunchAgents/com.aria2.6802.plist
+
+#run aria2c in daemon mode 	
+	aria2c --conf-path=/Users/shared/aria2/aria6800.conf -D
+	aria2c --conf-path=/Users/shared/aria2/aria6801.conf -D
+	aria2c --conf-path=/Users/shared/aria2/aria6802.conf -D
+
+#open GUI via default browser
+	open http://aria2.sarkrui.com
+
+exit
+

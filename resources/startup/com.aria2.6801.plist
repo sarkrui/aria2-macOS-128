@@ -1,0 +1,21 @@
+<?xml version="1.0"encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC"-//Apple//DTD PLIST 1.0//EN"
+"http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>KeepAlive</key>
+        <true/>
+        <key>RunAtLoad</key>
+        <true/>
+        <key>Label</key>
+        <string>com.aria2.6801</string>
+        <key>ProgramArguments</key>
+        <array>
+            <string>/usr/sbin/aria2c</string>
+            <string>-D</string>
+            <string>--conf-path=/.aria2/aria6801.conf</string>
+        </array>
+        <key>WorkingDirectory</key>
+        <string>/Users/username/Downloads</string>
+    </dict>
+</plist>

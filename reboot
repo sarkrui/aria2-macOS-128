@@ -1,0 +1,21 @@
+#! /bin/bash
+#Scripted by Sark Davidson
+#Expected to download baiduyun files with 128 threads
+#aria2 1.34.0 builds
+#https://github.com/sarkdavidson/aria2c-macOS-128-threads
+	
+
+	cd "$(dirname "$0")"
+	killall aria2c
+	touch /Users/shared/aria2/aria2.session
+
+#run aria2c in daemon mode 	
+	aria2c --conf-path=/Users/shared/aria2/aria6800.conf -D
+	aria2c --conf-path=/Users/shared/aria2/aria6801.conf -D
+	aria2c --conf-path=/Users/shared/aria2/aria6802.conf -D
+
+#open GUI via default browser
+	open http://aria2.sarkrui.com
+
+exit
+
