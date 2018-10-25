@@ -7,19 +7,25 @@
 	cd "$(dirname "$0")"
 
 #remove previous aria2 startups
-	launchctl stop *_aria2_*
-	launchctl remove *_aria2_*
+	launchctl remove aria2
+	launchctl remove com.aria2.6800
+	launchctl remove com.aria2.6801
+	launchctl remove com.aria2.6802
+	launchctl remove com.aria2.6803
+
 #kill running aria2c
 	sudo killall aria2c
 	
 #copy aria2c (128 threads) to /usr/local/bin and make it executable
 	sudo rm /usr/local/bin/aria2c
 	sudo rm /Users/shared/aria2.session
+	sudo rm -r /Users/shared/aria2/ 
 	sudo rm -r /.aria2/ 
-	sudo rm ~/Chrome
+	sudo rm -r ~/Chrome
 	sudo rm ~/Library/LaunchAgents/com.aria2.6800.plist 
 	sudo rm ~/Library/LaunchAgents/com.aria2.6801.plist 
 	sudo rm ~/Library/LaunchAgents/com.aria2.6802.plist 
+	sudo rm ~/Library/LaunchAgents/com.aria2.6803.plist 
 
 #open GUI via default browser
 	open http://aria2.sarkrui.com

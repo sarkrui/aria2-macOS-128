@@ -8,14 +8,14 @@
         <key>RunAtLoad</key>
         <true/>
         <key>Label</key>
-        <string>com.aria2.6800</string>
+        <string>com.aria2.6803</string>
         <key>ProgramArguments</key>
         <array>
             <string>/usr/local/bin/aria2c</string>
             <string>-D</string>
-            <string>--conf-path=/Users/shared/aria2/aria6800.conf</string>
+            <string>--conf-path=/Users/shared/aria2/aria6803.conf</string>
         </array>
         <key>WorkingDirectory</key>
-        <string>/Users/username/Downloads</string>
+        <string>/Volumes/GoogleDrive/我的云端硬盘/BaiduStorage</string>
     </dict>
 </plist>

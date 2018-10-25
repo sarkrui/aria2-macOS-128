@@ -11,9 +11,9 @@
         <string>com.aria2.6801</string>
         <key>ProgramArguments</key>
         <array>
-            <string>/usr/sbin/aria2c</string>
+            <string>/usr/local/bin/aria2c</string>
             <string>-D</string>
-            <string>--conf-path=/.aria2/aria6801.conf</string>
+            <string>--conf-path=/Users/shared/aria2/aria6801.conf</string>
         </array>
         <key>WorkingDirectory</key>
         <string>/Users/username/Downloads</string>

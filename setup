@@ -11,14 +11,19 @@
 	sudo rm /usr/local/bin/aria2c
 
 #remove previous aria2 startups
-	launchctl stop *_aria2_*
-	launchctl remove *_aria2_*
+	launchctl remove aria2
+	launchctl remove com.aria2.6800
+	launchctl remove com.aria2.6801
+	launchctl remove com.aria2.6802
+	launchctl remove com.aria2.6803
 
 #copy aria2c (128 threads) to /usr/local/bin and make it executable
 	cp resources/aria2c /usr/local/bin/
 	chmod +x /usr/local/bin/aria2c
 
 #aria2 initialization
+	sudo mkdir /etc/aria2/
+	sudo touch /etc/aria2/aria2.session
 	mkdir /Users/shared/aria2/
 	touch /Users/shared/aria2/aria2.session
 
@@ -55,13 +60,49 @@
 	launchctl load ~/Library/LaunchAgents/com.aria2.6801.plist
 	launchctl load ~/Library/LaunchAgents/com.aria2.6802.plist
 
+
 #run aria2c in daemon mode 	
 	aria2c --conf-path=/Users/shared/aria2/aria6800.conf -D
 	aria2c --conf-path=/Users/shared/aria2/aria6801.conf -D
 	aria2c --conf-path=/Users/shared/aria2/aria6802.conf -D
 
+#中文路径 For Google Steam Users
+	while true; do
+    	read -p "你是使用中文操作系统吗?有 G Suit 吗? (Y/N)" yn
+    	case $yn in
+        	[Yy]* ) 
+				cp resources/config/aria6803.conf /Users/shared/aria2/
+				cp resources/startup/com.aria2.6803.plist ~/Library/LaunchAgents/
+				sed -i '' -e 's/username/'$USER'/' ~/Library/LaunchAgents/com.aria2.6803.plist
+				chmod 644 ~/Library/LaunchAgents/com.aria2.6803.plist
+				launchctl load ~/Library/LaunchAgents/com.aria2.6803.plist
+				aria2c --conf-path=/Users/shared/aria2/aria6803.conf -D		
+			break;;
+        	[Nn]* ) 
+#英文路径 For Google Steam Users
+	while true; do
+    	read -p "Is your system language in English? Are you a Google Steam User? (Y/N)" yn
+    	case $yn in
+        	[Yy]* ) 
+				cp resources/config/aria6803_1.conf /Users/shared/aria2/aria6803.conf
+				cp resources/startup/com.aria2.6803_1.plist ~/Library/LaunchAgents/com.aria2.6803.plist
+				sed -i '' -e 's/username/'$USER'/' ~/Library/LaunchAgents/com.aria2.6803.plist
+				chmod 644 ~/Library/LaunchAgents/com.aria2.6803.plist
+				launchctl load ~/Library/LaunchAgents/com.aria2.6803.plist
+				aria2c --conf-path=/Users/shared/aria2/aria6803.conf -D		
+			break;;
+        	[Nn]* ) 
+				exit;;
+        	* ) echo "Please answer yes or no.";;
+    	esac
+	done
+				exit;;
+        	* ) echo "Please answer yes or no.";;
+    	esac
+	done
+
+
+
 #open GUI via default browser
 	open http://aria2.sarkrui.com
-
 exit
-

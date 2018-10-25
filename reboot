@@ -8,6 +8,7 @@
 	cd "$(dirname "$0")"
 	killall aria2c
 	touch /Users/shared/aria2/aria2.session
+	ech -n "" > /Users/shared/aria2/aria2.session
 
 #run aria2c in daemon mode 	
 	aria2c --conf-path=/Users/shared/aria2/aria6800.conf -D
