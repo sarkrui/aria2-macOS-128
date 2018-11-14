@@ -1,5 +1,5 @@
 # aria2-128-macos
-![1626579-d8617296feef88b1](https://ws3.sinaimg.cn/large/006tNc79gy1fp58oqa50nj31kw0m3gos.jpg)
+![1626579-d8617296feef88b1](https://i.imgur.com/J9DcESM.gif)
 ### 特点
 - 主程序已突破线程限制 （支持 128 线程）
 - 支持一键开启三个监听端口 （Port 6800, 6801, 6802）
